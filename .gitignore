@@ -10,3 +10,7 @@
 .idea/vcs.xml
 
 .idea/workspace.xml
+
+SVMCore/SVM.pyc
+
+IntervalNumCore/IntervalNum.pyc
