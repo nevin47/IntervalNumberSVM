@@ -45,6 +45,7 @@ class SVMStruct:
 		self.errorCache = mat(zeros((self.numSamples, 2)))
 		self.kernelOpt = kernelOption
 		self.kernelMat = calcKernelMatrix(self.train_x, self.kernelOpt)
+		self.testResult = []
 
 		
 # calculate the error for alpha k
@@ -220,17 +221,30 @@ def testSVM(svm, test_x, test_y):
 	supportVectorLabels = svm.train_y[supportVectorsIndex]
 	supportVectorAlphas = svm.alphas[supportVectorsIndex]
 	matchCount = 0
+	testResult = []
 	for i in xrange(numTestSamples):
 		kernelValue = calcKernelValue(supportVectors, test_x[i, :], svm.kernelOpt)
 		predict = kernelValue.T * multiply(supportVectorLabels, supportVectorAlphas) + svm.b
+		temp = [test_x[i, :],sign(predict),sign(test_y[i])]
+		testResult.append(temp)
 		if sign(predict) == sign(test_y[i]):
 			matchCount += 1
 	accuracy = float(matchCount) / numTestSamples
+	svm.testResult = testResult
 	return accuracy
 
 
 # show your trained svm model only available with 2-D data
-def showSVM(svm):
+def showSVM(svm,testInterval):
+	for i in testInterval:
+		width = i[0][1] - i[0][0]
+		height = i[1][0] - i[1][1]
+		rect = plt.Rectangle((i[0][0], i[1][1]), width, height, facecolor="#ffd054")
+		#print (i[0][0], i[1][1]), i[0][1], i[1][0]
+		#rect1 = plt.Rectangle((i[0][0], i[0][1]), width=1, height=1,facecolor="#ffd054")
+		#rect = plt.Rectangle((1,1), width=1, height=1,facecolor="#ffd054")
+		plt.gca().add_patch(rect)
+		#plt.gca().add_patch(rect1)
 	if svm.train_x.shape[1] != 2:
 		print "Sorry! I can not draw because the dimension of your data is not 2!"
 		return 1
@@ -241,6 +255,13 @@ def showSVM(svm):
 			plt.plot(svm.train_x[i, 0], svm.train_x[i, 1], 'or')
 		elif svm.train_y[i] == 1:
 			plt.plot(svm.train_x[i, 0], svm.train_x[i, 1], 'ob')
+
+	# draw test result
+	for i in xrange(len(svm.testResult)):
+		if svm.testResult[i][1] == svm.testResult[i][2]:
+			plt.plot(svm.testResult[i][0][0,0], svm.testResult[i][0][0,1], 'og')
+		else:
+			plt.plot(svm.testResult[i][0][0,0], svm.testResult[i][0][0,1], 'oc')
 
 	# mark support vectors
 	supportVectorsIndex = nonzero(svm.alphas.A > 0)[0]

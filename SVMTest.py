@@ -41,4 +41,4 @@ accuracy = SVM.testSVM(svmClassifier, test_x, test_y)
 ## step 4: show the result
 print "step 4: show the result..."	
 print 'The classify accuracy is: %.3f%%' % (accuracy * 100)
-SVM.showSVM(svmClassifier)
+SVM.showSVM(svmClassifier,dataSet[50:100])

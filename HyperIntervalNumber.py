@@ -61,21 +61,3 @@ class HyperIntervalNumber:
             TargetPoint.append(Middle)
         return TargetPoint
 
-
-# print "step 1: load data..."
-# dataSet = []
-# labels = []
-# fileIn = open('/Users/nevin47/Desktop/Python Test/testSet.txt')
-# for line in fileIn.readlines():
-# 	lineArr = line.strip().split('\t')
-# 	dataSet.append([float(lineArr[0]), float(lineArr[1])])
-# 	labels.append(float(lineArr[2]))
-
-
-##dataSet = mat()
-testarray = [[1,2],[2,3],[1,2]]
-a = HyperIntervalNumber(testarray)
-#print a.CalMiddlePoint()
-print a.GetAllPosPoint()
-#print a.PosPoint
-#print a.IntervalNum[0,0]
