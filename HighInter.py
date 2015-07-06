@@ -42,7 +42,8 @@ for i in dataSet:
 	out = newI.GetAllPosPoint()
 	for j in out:
 		NewdataSet.append(j)
-
+print "The test data is:"
+print dataSet
 
 dataSet = mat(NewdataSet)
 print len(dataSet)

@@ -29,6 +29,9 @@ for i in dataSet:
 	for j in out:
 		NewdataSet.append(j)
 
+print "The test data is:"
+print dataSet
+
 dataSet2 = mat(NewdataSet)
 labels = mat(labels).T
 train_x = dataSet2[0:200, :]
