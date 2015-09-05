@@ -5,7 +5,7 @@ import numpy as np
 from itertools import product, combinations
 from mpl_toolkits.mplot3d import Axes3D
 
-fig = plt.figure(111)
+fig = plt.figure(1)
 ax = fig.gca(projection='3d')
 ax.set_aspect("equal")
 
@@ -32,6 +32,18 @@ def CreatCube(ax,StartPoint = [0,0,0], EndPoint = [1,1,1],Color = 'b'):
     ax.plot3D(*zip(Point3,Point8), color=Color)
     return 0
 
+def CreatPlan(ax):
+    X = [15, 5, 16, 6]
+    Y = [4, 14, 4 ,14]
+    Z = [-5, -5, 5, 5]
+    ax.plot_trisurf(X, Y, Z,color = 'w',triangles='triangles')
+
+def CreatPlan2(ax):
+    X = [15, 5, 14, 4]
+    Y = [5, 15, 5 ,15]
+    Z = [-5, -5, 5, 5]
+    ax.plot_trisurf(X, Y, Z,color = 'y',triangles='triangles')
+
 CreatCube(ax,[0,0,0],[1,1,2],'b')
 CreatCube(ax,[2,2,2],[3,3,5],'b')
 CreatCube(ax,[5,5,2],[7,7,5],'b')
@@ -49,27 +61,13 @@ CreatCube(ax,[17,10,5],[19,12,6],'r')
 CreatCube(ax,[17,10,5],[19,12,6],'r')
 CreatCube(ax,[17,10,5],[19,12,6],'r')
 CreatCube(ax,[17,10,5],[19,12,6],'r')
-#draw Plane
-point1  = np.array([10,-5,17])
-normal1 = np.array([1,1,1])
-
-# a plane is a*x+b*y+c*z+d=0
-# [a,b,c] is the normal. Thus, we have to calculate
-# d and we're set
-d1 = -np.sum(point1*normal1)# dot product
 
 
-# create x,y
-xx, yy = np.meshgrid(range(15), range(15))
+CreatPlan(ax)
+CreatPlan2(ax)
 
-# calculate corresponding z
-z1 = (-normal1[0]*xx - normal1[1]*yy - d1)*1./normal1[2]
-
-
-# plot the surface
-ax.plot_surface(xx,yy,z1, color='w')
-
-
-
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
 
 plt.show()
