@@ -239,7 +239,8 @@ def showSVM(svm,testInterval):
 	for i in testInterval:
 		width = i[0][1] - i[0][0]
 		height = i[1][0] - i[1][1]
-		rect = plt.Rectangle((i[0][0], i[1][1]), width, height, facecolor="#ffd054")
+		# rect = plt.Rectangle((i[0][0], i[1][1]), width, height, facecolor="#ffd054")
+		rect = plt.Rectangle((i[0][0], i[1][1]), width, height, facecolor="#ffffff")
 		#print (i[0][0], i[1][1]), i[0][1], i[1][0]
 		#rect1 = plt.Rectangle((i[0][0], i[0][1]), width=1, height=1,facecolor="#ffd054")
 		#rect = plt.Rectangle((1,1), width=1, height=1,facecolor="#ffd054")
@@ -252,16 +253,16 @@ def showSVM(svm,testInterval):
 	# draw all samples
 	for i in xrange(svm.numSamples):
 		if svm.train_y[i] == -1:
-			plt.plot(svm.train_x[i, 0], svm.train_x[i, 1], 'or')
+			plt.plot(svm.train_x[i, 0], svm.train_x[i, 1], 'r^')
 		elif svm.train_y[i] == 1:
-			plt.plot(svm.train_x[i, 0], svm.train_x[i, 1], 'ob')
+			plt.plot(svm.train_x[i, 0], svm.train_x[i, 1], 'b^')
 
 	# draw test result
 	for i in xrange(len(svm.testResult)):
 		if svm.testResult[i][1] == svm.testResult[i][2]:
-			plt.plot(svm.testResult[i][0][0,0], svm.testResult[i][0][0,1], 'og')
+			plt.plot(svm.testResult[i][0][0,0], svm.testResult[i][0][0,1], 'gs')
 		else:
-			plt.plot(svm.testResult[i][0][0,0], svm.testResult[i][0][0,1], 'oc')
+			plt.plot(svm.testResult[i][0][0,0], svm.testResult[i][0][0,1], 'xb')
 
 	# mark support vectors
 	supportVectorsIndex = nonzero(svm.alphas.A > 0)[0]
@@ -276,5 +277,5 @@ def showSVM(svm,testInterval):
 	max_x = max(svm.train_x[:, 0])[0, 0]
 	y_min_x = float(-svm.b - w[0] * min_x) / w[1]
 	y_max_x = float(-svm.b - w[0] * max_x) / w[1]
-	plt.plot([min_x, max_x], [y_min_x, y_max_x], '-g')
+	plt.plot([min_x, max_x], [y_min_x, y_max_x], '--b')
 	plt.show()
