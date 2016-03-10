@@ -55,7 +55,7 @@ test_y = labels[801:1599, :]
 
 ## step 2: training...
 print "step 2: training..."
-C = 5
+C = 3
 toler = 0.001
 maxIter = 50
 svmClassifier = SVM.trainSVM(train_x, train_y, C, toler, maxIter, kernelOption = ('rbf', 0))
